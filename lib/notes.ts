@@ -1,19 +1,9 @@
 import { INote } from "@/types/note";
+import ActiveProvider from "./active-provider";
 import { prisma } from "./prisma";
-import { TPaginationRequest } from "@/types/pagination";
 
-export const getNoteList = async (searchParams: TPaginationRequest): Promise<INote[]> => {
-  const page = searchParams.page || 1;
-
-  const notes = await prisma.note.findMany({
-    skip: (page - 1) * 5,
-    take: 5,
-    orderBy: [
-      {
-        createdAt: 'desc'
-      }
-    ]
-  });
-
-  return notes;
-};
+export default class NoteProvider extends ActiveProvider {
+  async all(): Promise<INote[]> {
+    return await prisma.note.findMany(this.prismaQuery);
+  }
+}
