@@ -9,7 +9,7 @@ type TPrismaQuery = {
   }>
 }
 
-export default class ActiveProvider {
+export default abstract class ActiveProvider {
   readonly defaultPage: number = 1;
   readonly pageSize: number = 5;
   readonly searchParams: TPaginationRequest;
@@ -32,5 +32,11 @@ export default class ActiveProvider {
     });
 
     return this;
+  }
+
+  abstract count(): Promise<number>;
+
+  async tooBig(): Promise<boolean> {
+    return await this.count() > this.pageSize;
   }
 }

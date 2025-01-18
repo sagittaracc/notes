@@ -11,6 +11,7 @@ const NoteList: FC<NoteListProps> = async ({ dataProvider }) => {
   return (
     <>
       {notes.map(note => <p key={note.id}>{note.text}</p>)}
+      {await dataProvider.tooBig() && <p>Pagination</p>}
     </>
   )
 }
