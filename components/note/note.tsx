@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 import { createOrUpdateNote, deleteNote } from '@/lib/actions';
-import styles from './note.module.scss';
 
 const Note = () => {
   const [noteId, setNoteId] = useState<number | null>(null);
@@ -17,11 +16,11 @@ const Note = () => {
 
   return (
     <>
-      <div className={styles.note}>
+      <div className="w-full">
         <textarea cols={1} rows={5} value={noteText} onChange={e => setNoteText(e.target.value)}></textarea>
       </div>
 
-      <div className={styles.form}>
+      <div className="flex-row justify">
         <form action={createOrUpdateNote}>
           <input type="hidden" name="text" value={noteText} />
           <input type="hidden" name="id" value={noteId || ''} />
