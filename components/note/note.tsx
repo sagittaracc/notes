@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 import { createOrUpdateNote, deleteNote } from '@/lib/actions';
+import styles from './note.module.scss';
 
 const Note = () => {
   const [noteId, setNoteId] = useState<number | null>(null);
@@ -16,18 +17,22 @@ const Note = () => {
 
   return (
     <>
-      <textarea value={noteText} onChange={e => setNoteText(e.target.value)}></textarea>
+      <div className={styles.note}>
+        <textarea cols={1} rows={5} value={noteText} onChange={e => setNoteText(e.target.value)}></textarea>
+      </div>
 
-      <form action={createOrUpdateNote}>
-        <input type="hidden" name="text" value={noteText} />
-        <input type="hidden" name="id" value={noteId || ''} />
-        <button type="submit">Сохранить</button>
-      </form>
+      <div className={styles.form}>
+        <form action={createOrUpdateNote}>
+          <input type="hidden" name="text" value={noteText} />
+          <input type="hidden" name="id" value={noteId || ''} />
+          <button type="submit">Сохранить</button>
+        </form>
 
-      <form action={deleteNote}>
-        <input type="hidden" name="id" value={noteId || ''} />
-        <button type="submit">Удалить</button>
+        <form action={deleteNote}>
+          <input type="hidden" name="id" value={noteId || ''} />
+          <button type="submit">Удалить</button>
       </form>
+      </div>
     </>
   )
 }

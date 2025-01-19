@@ -1,0 +1,7 @@
+.note {
+    background-color: rgb(236, 167, 167);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+}

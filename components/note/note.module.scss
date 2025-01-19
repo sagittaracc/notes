@@ -1,0 +1,12 @@
+.note {
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

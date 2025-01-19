@@ -1,6 +1,7 @@
 import { range } from '@/lib/array'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import styles from './paginator.module.scss';
 
 type TPaginatorProps = {
   currentPage: number
@@ -12,7 +13,7 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageSize, totalCount }) =
   const pageCount = Math.ceil(totalCount / pageSize);
 
   return (
-    <>
+    <div className={styles.paginator}>
       {
         range(pageCount)
           .map((page, index) =>
@@ -23,7 +24,7 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageSize, totalCount }) =
                 {page + 1}
             </Link>)
       }
-    </>
+    </div>
   )
 }
 
