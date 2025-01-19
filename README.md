@@ -28,6 +28,10 @@
 
 `npm run build`
 
+- Переменные окружения должны быть настроены верно
+
+`export DATABASE_URL=mysql://root:verysecret@localhost:3307/notes`
+
 - Выполните миграции
 
 `npx prisma migrate deploy`
