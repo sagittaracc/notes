@@ -4,16 +4,24 @@ import React, { FC } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 
+type TNoteItem = {
+  id: number
+  text: string
+}
+
 type TNoteItemProps = {
-  note: {
-    id: number
-    text: string
-  }
+  note: TNoteItem
+}
+
+const toggleSelect = (note: TNoteItem) => {
+  noteStore.hasSelected(note.id, note.text)
+    ? noteStore.deselectNote()
+    : noteStore.selectNote(note.id, note.text);
 }
 
 const NoteItem: FC<TNoteItemProps> = ({ note }) => {
   return (
-    <p onClick={() => noteStore.selectNote(note.id, note.text)}>{note.text}</p>
+    <p onClick={() => toggleSelect(note)}>{note.text}</p>
   )
 }
 

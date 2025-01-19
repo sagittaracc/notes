@@ -12,6 +12,15 @@ class NoteStore {
     this.selectedNoteId = id;
     this.selectedNoteText = text;
   }
+
+  deselectNote() {
+    this.selectedNoteId = null;
+    this.selectedNoteText = null;
+  }
+
+  hasSelected(id, text) {
+    return id == this.selectedNoteId && text == this.selectedNoteText;
+  }
 }
 
 export default new NoteStore();
