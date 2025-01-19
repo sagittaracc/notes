@@ -21,3 +21,16 @@ export const createOrUpdateNote = async (formData: FormData) => {
 
   revalidatePath("/");
 }
+
+export const deleteNote = async (formData: FormData) => {
+  const id = formData.get("id") as unknown as number;
+  console.log(id);
+
+  if (id) {
+    await prisma.note.delete({
+      where: { id: Number(id) }
+    });
+  }
+
+  revalidatePath("/");
+}
