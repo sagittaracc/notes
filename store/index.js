@@ -8,12 +8,12 @@ class NoteStore {
     makeAutoObservable(this);
   }
 
-  selectNote(id, text) {
+  select(id, text) {
     this.selectedNoteId = id;
     this.selectedNoteText = text;
   }
 
-  deselectNote() {
+  deselect() {
     this.selectedNoteId = null;
     this.selectedNoteText = '';
   }

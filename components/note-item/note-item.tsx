@@ -18,8 +18,8 @@ const NoteItem: FC<TNoteItemProps> = ({ note }) => {
 
   const toggleSelect = (note: TNoteItem) => {
     selected
-      ? noteStore.deselectNote()
-      : noteStore.selectNote(note.id, note.text);
+      ? noteStore.deselect()
+      : noteStore.select(note.id, note.text);
 
     setSelected(!selected);
   }
