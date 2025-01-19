@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 
@@ -13,13 +13,17 @@ type TNoteItemProps = {
   note: TNoteItem
 }
 
-const toggleSelect = (note: TNoteItem) => {
-  noteStore.isSelected(note.id, note.text)
-    ? noteStore.deselectNote()
-    : noteStore.selectNote(note.id, note.text);
-}
-
 const NoteItem: FC<TNoteItemProps> = ({ note }) => {
+  const [selected, setSelected] = useState<boolean>(false);
+
+  const toggleSelect = (note: TNoteItem) => {
+    selected
+      ? noteStore.deselectNote()
+      : noteStore.selectNote(note.id, note.text);
+
+    setSelected(!selected);
+  }
+
   return (
     <p className="item-pointer p-2 m-1" onClick={() => toggleSelect(note)}>{note.text}</p>
   )

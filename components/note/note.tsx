@@ -6,11 +6,9 @@ import noteStore from '../../store';
 import { createOrUpdateNote, deleteNote } from '@/lib/actions';
 
 const Note = () => {
-  const [noteId, setNoteId] = useState<number | null>(null);
   const [noteText, setNoteText] = useState<string>('');
 
   useEffect(() => {
-    setNoteId(noteStore.selectedNoteId);
     setNoteText(noteStore.selectedNoteText);
   }, [noteStore.selectedNoteId])
 
@@ -23,13 +21,13 @@ const Note = () => {
       <div className="flex-row justify">
         <form action={createOrUpdateNote}>
           <input type="hidden" name="text" value={noteText} />
-          <input type="hidden" name="id" value={noteId || ''} />
-          <button type="submit">Сохранить</button>
+          <input type="hidden" name="id" value={noteStore.selectedNoteId || ''} />
+          <button type="submit" disabled={noteText === ''}>Сохранить</button>
         </form>
 
         <form action={deleteNote}>
-          <input type="hidden" name="id" value={noteId || ''} />
-          <button type="submit">Удалить</button>
+          <input type="hidden" name="id" value={noteStore.selectedNoteId || ''} />
+          <button type="submit" disabled={noteStore.selectedNoteId === null}>Удалить</button>
       </form>
       </div>
     </>

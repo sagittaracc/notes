@@ -17,14 +17,6 @@ class NoteStore {
     this.selectedNoteId = null;
     this.selectedNoteText = '';
   }
-
-  isSelected(id, text) {
-    return id == this.selectedNoteId && text == this.selectedNoteText;
-  }
-
-  hasSelected() {
-    return this.selectedNoteId !== null && this.selectedNoteText !== '';
-  }
 }
 
 export default new NoteStore();
