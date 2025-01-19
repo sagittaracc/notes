@@ -1,3 +1,10 @@
+## Установка
+# База данных
+- Запустите сервер базы данных (MySQL)
+`docker run --name notes-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=verysecret -d mysql:9`
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
