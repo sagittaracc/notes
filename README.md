@@ -16,21 +16,21 @@
 
 `git clone https://github.com/sagittaracc/notes.git`
 
-- Скопируйте файл настроек
+- Скопируйте файл настроек и отредактируйте
 
-`cp .env.local .env`
+`cp .example.env .env`
 
 - Установите приложение
 
 `npm install`
 
-- Выполните миграции
-
-`npx prisma migrate deploy`
-
 - Запустите сборку
 
 `npm run build`
+
+- Выполните миграции
+
+`npx prisma migrate deploy`
 
 - Запустите приложение
 
