@@ -37,6 +37,7 @@ export default abstract class ActiveProvider {
     return this;
   }
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   abstract all(): any;
   abstract count(): Promise<number>;
 

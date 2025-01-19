@@ -1,7 +1,6 @@
 import { range } from '@/lib/array'
 import Link from 'next/link'
 import React, { FC } from 'react'
-import styles from './paginator.module.scss';
 
 type TPaginatorProps = {
   currentPage: number

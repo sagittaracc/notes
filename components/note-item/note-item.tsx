@@ -17,7 +17,7 @@ const NoteItem: FC<TNoteItemProps> = ({ note }) => {
   const [selected, setSelected] = useState<boolean>(false);
 
   const toggleSelect = (note: TNoteItem) => {
-    selected
+    selected /* eslint-disable-line */
       ? noteStore.deselect()
       : noteStore.select(note.id, note.text);
 

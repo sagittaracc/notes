@@ -10,6 +10,7 @@ const Note = () => {
 
   useEffect(() => {
     setNoteText(noteStore.selectedNoteText);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noteStore.selectedNoteId])
 
   const handleSubmit = (serverAction: ((formData: FormData) => void | Promise<void>)) => async (e: FormEvent<HTMLFormElement>) => {
