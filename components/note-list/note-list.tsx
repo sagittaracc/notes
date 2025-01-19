@@ -2,17 +2,18 @@ import NoteProvider from '@/lib/notes';
 import React, { FC } from 'react'
 import Paginator from '../paginator/paginator';
 import { INote } from '@/types/note';
+import NoteItem from '../note-item/note-item';
 
-type NoteListProps = {
+type TNoteListProps = {
   dataProvider: NoteProvider
 }
 
-const NoteList: FC<NoteListProps> = async ({ dataProvider }) => {
+const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
   const notes = await dataProvider.order('createdAt', 'desc').fetch() as Array<INote>;
 
   return (
     <>
-      {notes.map(note => <p key={note.id}>{note.text}</p>)}
+      {notes.map(note => <NoteItem key={note.id} id={note.id} text={note.text} />)}
 
       {
         dataProvider.tooBig()
