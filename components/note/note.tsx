@@ -1,11 +1,11 @@
 "use client";
 
-import { createNote } from '@/lib/actions';
-import React, { useState } from 'react'
+import { createOrUpdateNote } from '@/lib/actions';
+import React from 'react'
 
 const Note = () => {
   return (
-    <form action={createNote}>
+    <form action={createOrUpdateNote}>
       <div>
         <textarea name="note"/>
       </div>
