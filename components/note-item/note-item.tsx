@@ -3,13 +3,15 @@
 import React, { FC } from 'react'
 
 type TNoteItemProps = {
-  id: number
-  text: string
+  note: {
+    id: number
+    text: string
+  }
 }
 
-const NoteItem: FC<TNoteItemProps> = ({ id, text }) => {
+const NoteItem: FC<TNoteItemProps> = ({ note }) => {
   return (
-    <p onClick={() => console.log(id)}>{text}</p>
+    <p onClick={() => console.log(note.id)}>{note.text}</p>
   )
 }
 

@@ -13,7 +13,7 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
 
   return (
     <>
-      {notes.map(note => <NoteItem key={note.id} id={note.id} text={note.text} />)}
+      {notes.map(note => <NoteItem key={note.id} note={note} />)}
 
       {
         dataProvider.tooBig()
