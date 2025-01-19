@@ -16,13 +16,13 @@
 
 `git clone https://github.com/sagittaracc/notes.git`
 
-- Установите приложение
-
-`npm install`
-
 - Скопируйте файл настроек
 
 `cp .env.local .env`
+
+- Установите приложение
+
+`npm install`
 
 - Выполните миграции
 
