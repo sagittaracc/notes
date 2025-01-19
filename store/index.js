@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class NoteStore {
   selectedNoteId = null;
-  selectedNoteText = null;
+  selectedNoteText = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -15,7 +15,7 @@ class NoteStore {
 
   deselectNote() {
     this.selectedNoteId = null;
-    this.selectedNoteText = null;
+    this.selectedNoteText = '';
   }
 
   hasSelected(id, text) {
