@@ -14,7 +14,7 @@ type TNoteItemProps = {
 }
 
 const toggleSelect = (note: TNoteItem) => {
-  noteStore.hasSelected(note.id, note.text)
+  noteStore.isSelected(note.id, note.text)
     ? noteStore.deselectNote()
     : noteStore.selectNote(note.id, note.text);
 }
