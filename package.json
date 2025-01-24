@@ -12,6 +12,7 @@
     "@prisma/client": "^6.2.1",
     "mobx": "^6.13.5",
     "mobx-react": "^9.2.0",
+    "moment": "^2.30.1",
     "next": "15.1.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
