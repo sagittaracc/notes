@@ -17,6 +17,10 @@ class NoteStore {
     this.selectedNoteId = null;
     this.selectedNoteText = '';
   }
+
+  same(note) {
+    return note.id === this.selectedNoteId;
+  }
 }
 
 export default new NoteStore();

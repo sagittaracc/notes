@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 import styles from './note-item.module.scss';
@@ -12,18 +12,15 @@ type TNoteItemProps = {
 }
 
 const NoteItem: FC<TNoteItemProps> = ({ note }) => {
-  const [selected, setSelected] = useState<boolean>(false);
 
-  const toggle = (note: INote) => {
-    selected /* eslint-disable-line */
+  const edit = (note: INote) => (
+    noteStore.same(note)
       ? noteStore.deselect()
-      : noteStore.select(note.id, note.text);
-
-    setSelected(!selected);
-  }
+      : noteStore.select(note.id, note.text)
+  );
 
   return (
-    <div className={`${styles.item} p-2 m-1 pointer`} onClick={() => toggle(note)}>
+    <div className={`${styles.item} p-2 m-1 pointer`} onClick={() => edit(note)}>
       <p className="m-0">{note.text}</p>
       <p className="m-0 text-right text-inactive font-small">
         {moment(note.createdAt).format('DD.MM.YYYY')}
