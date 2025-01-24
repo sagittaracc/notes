@@ -1,0 +1,6 @@
+@use '../../app/variables.scss' as v;
+
+.note {
+  border: 1px solid v.$inactive-color;
+  border-radius: v.$base-size;
+}
