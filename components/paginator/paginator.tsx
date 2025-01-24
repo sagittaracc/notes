@@ -13,7 +13,7 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageSize, totalCount }) =
   const pageCount = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className={`flex-row gap-2 p-2 font-medium ${styles.paginator}`}>
+    <div className={`${styles.paginator} flex-row gap-2 p-2 font-medium`}>
       {
         range({count: pageCount, startWith: 1})
           .map((page, index) =>
