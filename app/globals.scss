@@ -61,11 +61,15 @@
 }
 
 .text-active {
-  color: v.$text-active-color;
+  color: v.$active-color;
 }
 
 .text-inactive {
-  color: v.$text-inactive-color;
+  color: v.$inactive-color;
+}
+
+.decoration-none {
+  text-decoration: none;
 }
 
 .flex-row {

@@ -1,6 +1,7 @@
 import { range } from '@/lib/array'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import styles from './paginator.module.scss';
 
 type TPaginatorProps = {
   currentPage: number
@@ -12,15 +13,15 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageSize, totalCount }) =
   const pageCount = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="flex-row gap-2 p-2 font-medium">
+    <div className={`flex-row gap-2 p-2 font-medium ${styles.paginator}`}>
       {
-        range(pageCount)
+        range({count: pageCount, startWith: 1})
           .map((page, index) =>
             <Link
               key={index}
-              href={`/?page=${page + 1}`}
-              className={currentPage == page + 1 ? 'active' : ''}>
-                {page + 1}
+              href={`/?page=${page}`}
+              className={`p-1 decoration-none ${currentPage == page ? styles.active : ''}`}>
+                {page}
             </Link>)
       }
     </div>

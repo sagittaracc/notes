@@ -1,0 +1,18 @@
+@use '../../app/variables.scss' as v;
+
+.paginator {
+  a,
+  a:visited,
+  a:hover,
+  a:active {
+    border: 1px solid v.$inactive-color;
+    border-radius: v.$base-size;
+    background-color: v.$inactive-color;
+    color: v.$body-color;
+  }
+}
+
+.active {
+  color: v.$active-color !important;
+  background-color: v.$body-color !important;
+}

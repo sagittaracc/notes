@@ -1,3 +1,3 @@
-export const range = (n: number): Array<number> => {
-  return [...Array(n).keys()];
+export const range = ({count, startWith}: {count: number, startWith: number}): Array<number> => {
+  return [...Array(count).keys()].map(n => n + startWith);
 }
