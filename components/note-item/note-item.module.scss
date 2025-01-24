@@ -1,0 +1,6 @@
+@use '../../app/variables.scss' as v;
+
+.item {
+  background-color: v.$base-color;
+  border-radius: v.$base-size;
+}

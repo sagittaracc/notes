@@ -3,6 +3,7 @@
 import React, { FC, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
+import styles from './note-item.module.scss';
 
 type TNoteItem = {
   id: number
@@ -25,7 +26,7 @@ const NoteItem: FC<TNoteItemProps> = ({ note }) => {
   }
 
   return (
-    <p className="item-pointer p-2 m-1" onClick={() => toggleSelect(note)}>{note.text}</p>
+    <p className={`${styles.item} p-2 m-1 pointer`} onClick={() => toggleSelect(note)}>{note.text}</p>
   )
 }
 

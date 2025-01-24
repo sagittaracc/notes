@@ -1,40 +1,51 @@
-$base-color: rgb(236, 167, 167);
-$base-size: 5px;
+@use 'variables' as v;
+
+.p-0 {
+  padding: 0;
+}
 
 .p-1 {
-  padding: $base-size;
+  padding: v.$base-size
 }
 
 .p-2 {
-  padding: $base-size * 2;
+  padding: v.$base-size * 2;
 }
 
 .p-3 {
-  padding: $base-size * 3;
+  padding: v.$base-size * 3;
+}
+
+.m-0 {
+  margin: 0;
 }
 
 .m-1 {
-  margin: $base-size;
+  margin: v.$base-size
 }
 
 .m-2 {
-  margin: $base-size * 2;
+  margin: v.$base-size * 2;
 }
 
 .m-3 {
-  margin: $base-size * 3;
+  margin: v.$base-size * 3;
+}
+
+.font-small {
+  font-size: v.$font-small;
 }
 
 .font-normal {
-  font-size: 1em;
+  font-size: v.$font-normal;
 }
 
 .font-medium {
-  font-size: 1.5em;
+  font-size: v.$font-medium;
 }
 
 .font-large {
-  font-size: 2em;
+  font-size: v.$font-large
 }
 
 .flex-row {
@@ -47,15 +58,15 @@ $base-size: 5px;
 }
 
 .gap-1 {
-  gap: $base-size;
+  gap: v.$base-size;
 }
 
 .gap-2 {
-  gap: $base-size * 2;
+  gap: v.$base-size * 2;
 }
 
 .gap-3 {
-  gap: $base-size * 3;
+  gap: v.$base-size * 3;
 }
 
 .w-full {
@@ -65,16 +76,6 @@ $base-size: 5px;
   }
 }
 
-.item {
-  background-color: $base-color;
-  border-radius: $base-size;
-}
-
 .pointer {
   cursor: pointer;
-}
-
-.item-pointer {
-  @extend .item;
-  @extend .pointer;
 }
