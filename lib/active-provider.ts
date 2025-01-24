@@ -15,12 +15,14 @@ export default abstract class ActiveProvider {
   private readonly searchParams: TPaginationRequest;
   public readonly pageSize: number = 5;
   public currentPage: number;
+  public pageCount: number;
   public totalCount: number;
   prismaQuery: TPrismaQuery;
 
   constructor(searchParams: TPaginationRequest) {
     this.searchParams = searchParams;
     this.currentPage = searchParams.page || this.defaultPage;
+    this.pageCount = 0;
     this.totalCount = 0;
     this.prismaQuery = {
       skip: (this.currentPage - 1) * this.pageSize,
@@ -47,6 +49,7 @@ export default abstract class ActiveProvider {
       this.count()
     ]);
 
+    this.pageCount = Math.ceil(count / this.pageSize);
     this.totalCount = count;
 
     return data;

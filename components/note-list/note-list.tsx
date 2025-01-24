@@ -19,8 +19,7 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
         dataProvider.tooBig()
           && <Paginator
               currentPage={dataProvider.currentPage}
-              pageSize={dataProvider.pageSize}
-              totalCount={dataProvider.totalCount}/>}
+              pageCount={dataProvider.pageCount}/>}
     </>
   )
 }

@@ -5,13 +5,10 @@ import styles from './paginator.module.scss';
 
 type TPaginatorProps = {
   currentPage: number
-  pageSize: number
-  totalCount: number
+  pageCount: number
 }
 
-const Paginator: FC<TPaginatorProps> = ({ currentPage, pageSize, totalCount }) => {
-  const pageCount = Math.ceil(totalCount / pageSize);
-
+const Paginator: FC<TPaginatorProps> = ({ currentPage, pageCount }) => {
   return (
     <div className={`${styles.paginator} flex-row gap-2 p-2 font-medium`}>
       {
