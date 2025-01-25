@@ -10,9 +10,9 @@
     background-color: v.$inactive-color;
     color: v.$body-color;
   }
-}
 
-.active {
-  color: v.$active-color !important;
-  background-color: v.$body-color !important;
+  .active {
+    color: v.$active-color !important;
+    background-color: v.$body-color !important;
+  }
 }

@@ -14,13 +14,13 @@ type TNoteItemProps = {
 const NoteItem: FC<TNoteItemProps> = ({ note }) => {
 
   const edit = (note: INote) => (
-    noteStore.same(note)
+    noteStore.selected(note)
       ? noteStore.deselect()
       : noteStore.select(note.id, note.text)
   );
 
   return (
-    <div className={`${styles.item} p-2 pointer`} onClick={() => edit(note)}>
+    <div className={`${styles.item} p-2 pointer ${noteStore.selected(note) ? styles.active : ''}`} onClick={() => edit(note)}>
       <p className="m-0">{note.text}</p>
       <p className="m-0 text-right text-inactive font-small">
         {moment(note.createdAt).format('DD.MM.YYYY')}

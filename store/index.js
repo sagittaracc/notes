@@ -18,7 +18,7 @@ class NoteStore {
     this.selectedNoteText = '';
   }
 
-  same(note) {
+  selected(note) {
     return note.id === this.selectedNoteId;
   }
 }
