@@ -2,6 +2,7 @@ import { range } from '@/lib/array'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import styles from './paginator.module.scss';
+import classNames from 'classnames';
 
 type TPaginatorProps = {
   currentPage: number
@@ -17,7 +18,13 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageCount }) => {
             <Link
               key={index}
               href={`/?page=${page}`}
-              className={`p-1 decoration-none ${currentPage == page ? styles.active : ''}`}>
+              className={
+                classNames(
+                  'p-1',
+                  'decoration-none',
+                  {[styles.active]: currentPage == page}
+                )
+              }>
                 {page}
             </Link>)
       }
