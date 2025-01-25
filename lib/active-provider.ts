@@ -16,6 +16,7 @@ export default abstract class ActiveProvider {
   public readonly pageSize: number = 5;
   public currentPage: number;
   public pageCount: number;
+  private chunkCount: number;
   public totalCount: number;
   prismaQuery: TPrismaQuery;
 
@@ -23,6 +24,7 @@ export default abstract class ActiveProvider {
     this.searchParams = searchParams;
     this.currentPage = searchParams.page || this.defaultPage;
     this.pageCount = 0;
+    this.chunkCount = 0;
     this.totalCount = 0;
     this.prismaQuery = {
       skip: (this.currentPage - 1) * this.pageSize,
@@ -49,13 +51,24 @@ export default abstract class ActiveProvider {
       this.count()
     ]);
 
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+    const _data = data as Array<any>;
     this.pageCount = Math.ceil(count / this.pageSize);
+    this.chunkCount = _data.length;
     this.totalCount = count;
 
-    return data;
+    return _data;
   }
 
   tooBig(): boolean {
     return this.totalCount > this.pageSize;
+  }
+
+  wrongPageWasRequested(): boolean {
+    return this.chunkCount === 0 && this.totalCount > 0;
+  }
+
+  getLastPage(): number {
+    return this.pageCount;
   }
 }

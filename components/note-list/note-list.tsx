@@ -5,6 +5,7 @@ import { INote } from '@/types/note';
 import NoteItem from '../note-item/note-item';
 import Placeholder from '../placeholder/placeholder';
 import styles from './note-list.module.scss';
+import RedirectWithQueryParam from '../redirect-with-query-param/redirect-with-query.param';
 
 type TNoteListProps = {
   dataProvider: NoteProvider
@@ -15,6 +16,10 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
 
   return (
     <div className={`${styles.notes} flex-column justify`}>
+      {
+        dataProvider.wrongPageWasRequested() &&
+          <RedirectWithQueryParam name='page' value={dataProvider.getLastPage()}/>
+      }
       {
         notes.length === 0 &&
           <Placeholder text="Нет заметок"/>
