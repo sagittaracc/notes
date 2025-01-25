@@ -7,8 +7,8 @@ type TPlaceholderProps = {
 
 const Placeholder: FC<TPlaceholderProps> = ({ text }) => {
   return (
-    <div className={`${styles.placeholder} m-3`}>
-      <div>{text}</div>
+    <div className={styles.placeholder}>
+      <span>{text}</span>
     </div>
   )
 }

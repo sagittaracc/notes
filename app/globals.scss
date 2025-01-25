@@ -1,5 +1,14 @@
 @use 'variables' as v;
 
+html, body {
+  margin: v.$base-size;
+}
+
+body {
+  width: 600px;
+  margin: auto;
+}
+
 .p-0 {
   padding: 0;
 }
@@ -26,6 +35,10 @@
 
 .m-2 {
   margin: v.$base-size * 2;
+}
+
+.mt-2 {
+  margin-top: v.$base-size * 2;
 }
 
 .m-3 {
@@ -75,6 +88,11 @@
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .justify {
