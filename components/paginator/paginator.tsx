@@ -1,15 +1,21 @@
+"use client";
+
 import { range } from '@/lib/array'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import styles from './paginator.module.scss';
 import classNames from 'classnames';
+import useQueryParams from '@/hooks/useQueryParams';
 
 type TPaginatorProps = {
   currentPage: number
   pageCount: number
+  queryParam: string
 }
 
-const Paginator: FC<TPaginatorProps> = ({ currentPage, pageCount }) => {
+const Paginator: FC<TPaginatorProps> = ({ currentPage, pageCount, queryParam }) => {
+  const { createUrlWithParam } = useQueryParams();
+
   return (
     <div className={`${styles.paginator} flex-row gap-2 font-medium`}>
       {
@@ -17,7 +23,7 @@ const Paginator: FC<TPaginatorProps> = ({ currentPage, pageCount }) => {
           .map((page, index) =>
             <Link
               key={index}
-              href={`/?page=${page}`}
+              href={createUrlWithParam(queryParam, page)}
               className={
                 classNames(
                   'p-1',

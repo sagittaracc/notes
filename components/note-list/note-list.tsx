@@ -32,7 +32,9 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
           <div className="mt-2">
             <Paginator
               currentPage={dataProvider.currentPage}
-              pageCount={dataProvider.pageCount}/>
+              pageCount={dataProvider.pageCount}
+              queryParam='page'
+            />
           </div>
       }
     </div>
