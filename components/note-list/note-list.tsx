@@ -26,7 +26,7 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
       }
 
       {
-        notes.length &&
+        !!notes.length &&
           <div className={`${styles.list} flex-column`}>
             {notes.map(note => <NoteItem key={note.id} note={note} />)}
           </div>
