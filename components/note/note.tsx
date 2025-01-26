@@ -25,7 +25,7 @@ const Note = () => {
 
   return (
     <>
-      <div className="w-full mt-2">
+      <div className="w-full">
         <textarea
           className={styles.note}
           placeholder="Текст заметки"

@@ -1,0 +1,6 @@
+@use '../../app/variables.scss' as v;
+
+.separator {
+  border: none;
+  border-top: 1px solid v.$inactive-color;
+}
