@@ -3,7 +3,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
-import { createOrUpdateNote, deleteNote } from '@/lib/actions';
+import { deleteNote, saveNote } from '@/lib/actions';
 import styles from './note.module.scss';
 
 const Note = () => {
@@ -36,7 +36,7 @@ const Note = () => {
       </div>
 
       <div className="flex-row justify">
-        <form onSubmit={handleSubmit(createOrUpdateNote)}>
+        <form onSubmit={handleSubmit(saveNote)}>
           <input type="hidden" name="text" value={noteText} />
           <input type="hidden" name="id" value={noteStore.selectedNoteId || ''} />
           <button type="submit" disabled={noteText === ''}>Сохранить</button>

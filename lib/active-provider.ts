@@ -1,14 +1,7 @@
 import { TPaginationRequest } from "@/types/pagination";
 import { TSort } from "@/types/sort";
 import { prisma } from "./prisma";
-
-type TPrismaQuery = {
-  skip: number
-  take: number
-  orderBy: Array<{
-    [key: string]: TSort
-  }>
-}
+import { TOrderBy } from "@/types/order";
 
 export default abstract class ActiveProvider {
   private readonly defaultPage: number = 1;
@@ -18,7 +11,9 @@ export default abstract class ActiveProvider {
   public pageCount: number;
   private chunkCount: number;
   public totalCount: number;
-  prismaQuery: TPrismaQuery;
+  public offset: number;
+  public limit: number;
+  public orderBy: TOrderBy;
 
   constructor(searchParams: TPaginationRequest) {
     this.searchParams = searchParams;
@@ -26,15 +21,13 @@ export default abstract class ActiveProvider {
     this.pageCount = 0;
     this.chunkCount = 0;
     this.totalCount = 0;
-    this.prismaQuery = {
-      skip: (this.currentPage - 1) * this.pageSize,
-      take: this.pageSize,
-      orderBy: []
-    };
+    this.offset = (this.currentPage - 1) * this.pageSize;
+    this.limit = this.pageSize;
+    this.orderBy = [];
   }
 
   order(column: string, sort: TSort) {
-    this.prismaQuery.orderBy.push({
+    this.orderBy.push({
       [column]: sort
     });
 

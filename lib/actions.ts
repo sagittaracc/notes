@@ -1,23 +1,16 @@
 "use server";
 
+import Note from "@/models/note";
 import { revalidatePath } from "next/cache";
-import { prisma } from "./prisma";
 
-export const createOrUpdateNote = async (formData: FormData) => {
+export const saveNote = async (formData: FormData) => {
   const id = formData.get("id") as unknown as number;
   const text = formData.get("text") as string;
 
-  if (id) {
-    await prisma.note.update({
-      where: { id: Number(id) },
-      data: { text }
-    });
-  }
-  else {
-    await prisma.note.create({
-      data: { text }
-    });
-  }
+  const note = new Note();
+  note.id = Number(id);
+  note.text = text;
+  await note.save();
 
   revalidatePath("/");
 }
@@ -25,11 +18,8 @@ export const createOrUpdateNote = async (formData: FormData) => {
 export const deleteNote = async (formData: FormData) => {
   const id = formData.get("id") as unknown as number;
 
-  if (id) {
-    await prisma.note.delete({
-      where: { id: Number(id) }
-    });
-  }
+  const note = Note.findById(Number(id));
+  await note.delete();
 
   revalidatePath("/");
 }
