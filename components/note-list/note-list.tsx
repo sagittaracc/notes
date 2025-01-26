@@ -1,4 +1,3 @@
-import NoteProvider from '@/lib/notes';
 import React, { FC } from 'react'
 import Paginator from '../paginator/paginator';
 import { INote } from '@/types/note';
@@ -6,9 +5,10 @@ import NoteItem from '../note-item/note-item';
 import Placeholder from '../placeholder/placeholder';
 import styles from './note-list.module.scss';
 import RedirectWithQueryParam from '../redirect-with-query-param/redirect-with-query.param';
+import ActiveProvider from '@/lib/active-provider';
 
 type TNoteListProps = {
-  dataProvider: NoteProvider
+  dataProvider: ActiveProvider
 }
 
 const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {

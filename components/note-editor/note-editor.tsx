@@ -4,7 +4,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import { observer } from 'mobx-react';
 import noteStore from '../../store';
 import { deleteNote, saveNote } from '@/lib/actions';
-import styles from './note.module.scss';
+import styles from './note-editor.module.scss';
 
 const Note = () => {
   const [noteText, setNoteText] = useState<string>('');

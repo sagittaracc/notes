@@ -1,9 +1,9 @@
 import { TPaginationRequest } from "@/types/pagination";
 import { TSort } from "@/types/sort";
-import { prisma } from "./prisma";
-import { TQuery } from "@/types/provider";
+import { ActiveRecord, TQuery } from "@/types/provider";
 
-export default abstract class ActiveProvider {
+export default class ActiveProvider {
+  private readonly model: ActiveRecord;
   private readonly searchParams: TPaginationRequest;
   private readonly defaultPage: number = 1;
   private readonly pageSize: number = 5;
@@ -13,7 +13,8 @@ export default abstract class ActiveProvider {
   public currentPage: number;
   public query: TQuery;
 
-  constructor(searchParams: TPaginationRequest) {
+  constructor(model: ActiveRecord, searchParams: TPaginationRequest) {
+    this.model = model;
     this.searchParams = searchParams;
     this.currentPage = this.searchParams.page || this.defaultPage;
     this.query = {
@@ -31,23 +32,14 @@ export default abstract class ActiveProvider {
     return this;
   }
 
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  abstract all(): any;
-  abstract count(): Promise<number>;
-
   async fetch() {
-    const [data, count] = await prisma.$transaction([
-      this.all(),
-      this.count()
-    ]);
+    const [data, count] = await this.model(this.query);
 
-    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-    const _data = data as Array<any>;
     this.pageCount = Math.ceil(count / this.pageSize);
-    this.chunkLength = _data.length;
+    this.chunkLength = data.length;
     this.totalCount = count;
 
-    return _data;
+    return data;
   }
 
   tooBig(): boolean {

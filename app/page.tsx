@@ -1,18 +1,19 @@
+import NoteEditor from "@/components/note-editor/note-editor";
 import NoteList from "@/components/note-list/note-list";
-import Note from "@/components/note/note";
 import Separator from "@/components/separator/separator";
-import NoteProvider from "@/lib/notes";
+import ActiveProvider from "@/lib/active-provider";
+import Note from "@/models/note";
 import { IHomePageRequest } from "@/types/home-page";
 
 export default async function Home(request: IHomePageRequest) {
   const searchParams = await request.searchParams;
-  const dataProvider = new NoteProvider(searchParams);
+  const dataProvider = new ActiveProvider(Note.find(), searchParams);
 
   return (
-    <main>
+    <>
       <NoteList dataProvider={dataProvider}/>
       <Separator/>
-      <Note/>
-    </main>
+      <NoteEditor/>
+    </>
   );
 }
