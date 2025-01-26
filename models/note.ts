@@ -1,12 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { INote } from "@/types/note";
-import { TOrderBy } from "@/types/order";
-
-type TPrismaQuery = {
-  skip: number
-  take: number
-  orderBy?: TOrderBy
-}
+import { TQuery } from "@/types/provider";
 
 class Note
 {
@@ -17,8 +11,12 @@ class Note
     return new this;
   }
 
-  static findMany(query: TPrismaQuery): Promise<INote[]> {
-    return prisma.note.findMany(query);
+  static findMany(query: TQuery): Promise<INote[]> {
+    return prisma.note.findMany({
+      skip: query.offset,
+      take: query.limit,
+      orderBy: query.orderBy
+    });
   }
 
   static findById(id: number) {

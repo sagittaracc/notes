@@ -1,33 +1,30 @@
 import { TPaginationRequest } from "@/types/pagination";
 import { TSort } from "@/types/sort";
 import { prisma } from "./prisma";
-import { TOrderBy } from "@/types/order";
+import { TQuery } from "@/types/provider";
 
 export default abstract class ActiveProvider {
-  private readonly defaultPage: number = 1;
   private readonly searchParams: TPaginationRequest;
-  public readonly pageSize: number = 5;
+  private readonly defaultPage: number = 1;
+  private readonly pageSize: number = 5;
+  private chunkLength: number = 0;
+  private totalCount: number = 0;
+  public pageCount: number = 0;
   public currentPage: number;
-  public pageCount: number;
-  private chunkCount: number;
-  public totalCount: number;
-  public offset: number;
-  public limit: number;
-  public orderBy: TOrderBy;
+  public query: TQuery;
 
   constructor(searchParams: TPaginationRequest) {
     this.searchParams = searchParams;
-    this.currentPage = searchParams.page || this.defaultPage;
-    this.pageCount = 0;
-    this.chunkCount = 0;
-    this.totalCount = 0;
-    this.offset = (this.currentPage - 1) * this.pageSize;
-    this.limit = this.pageSize;
-    this.orderBy = [];
+    this.currentPage = this.searchParams.page || this.defaultPage;
+    this.query = {
+      offset: (this.currentPage - 1) * this.pageSize,
+      limit: this.pageSize,
+      orderBy: [],
+    }
   }
 
   order(column: string, sort: TSort) {
-    this.orderBy.push({
+    this.query.orderBy.push({
       [column]: sort
     });
 
@@ -47,7 +44,7 @@ export default abstract class ActiveProvider {
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     const _data = data as Array<any>;
     this.pageCount = Math.ceil(count / this.pageSize);
-    this.chunkCount = _data.length;
+    this.chunkLength = _data.length;
     this.totalCount = count;
 
     return _data;
@@ -58,7 +55,7 @@ export default abstract class ActiveProvider {
   }
 
   wrongPageWasRequested(): boolean {
-    return this.chunkCount === 0 && this.totalCount > 0;
+    return this.chunkLength === 0 && this.totalCount > 0;
   }
 
   getLastPage(): number {

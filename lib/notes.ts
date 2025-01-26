@@ -4,11 +4,7 @@ import Note from "@/models/note";
 
 export default class NoteProvider extends ActiveProvider {
   all(): Promise<INote[]> {
-    return Note.findMany({
-      skip: this.offset,
-      take: this.limit,
-      orderBy: this.orderBy,
-    })
+    return Note.findMany(this.query)
   }
 
   count(): Promise<number> {
