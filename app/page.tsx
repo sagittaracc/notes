@@ -9,10 +9,10 @@ export default async function Home(request: IHomePageRequest) {
   const dataProvider = new NoteProvider(searchParams);
 
   return (
-    <>
+    <main>
       <NoteList dataProvider={dataProvider}/>
       <Separator/>
       <Note/>
-    </>
+    </main>
   );
 }

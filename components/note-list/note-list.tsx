@@ -15,34 +15,37 @@ const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
   const notes = await dataProvider.order('createdAt', 'desc').fetch() as Array<INote>;
 
   return (
-    <div className={`${styles.notes} flex-column justify`}>
+    <>
       {
         dataProvider.wrongPageWasRequested() &&
           <RedirectWithQueryParam name='page' value={dataProvider.getLastPage()}/>
       }
-      {
-        notes.length === 0 &&
-          <Placeholder text="Нет заметок"/>
-      }
 
-      {
-        !!notes.length &&
-          <div className="flex-column gap-1">
-            {notes.map(note => <NoteItem key={note.id} note={note} />)}
-          </div>
-      }
+      <div className={`${styles.notes} flex-column justify`}>
+        {
+          notes.length === 0 &&
+            <Placeholder text="Нет заметок"/>
+        }
 
-      {
-        dataProvider.tooBig() &&
-          <div className="mt-2">
-            <Paginator
-              currentPage={dataProvider.currentPage}
-              pageCount={dataProvider.pageCount}
-              queryParam='page'
-            />
-          </div>
-      }
-    </div>
+        {
+          !!notes.length &&
+            <div className="flex-column gap-1">
+              {notes.map(note => <NoteItem key={note.id} note={note} />)}
+            </div>
+        }
+
+        {
+          dataProvider.tooBig() &&
+            <div className="mt-2">
+              <Paginator
+                currentPage={dataProvider.currentPage}
+                pageCount={dataProvider.pageCount}
+                queryParam='page'
+              />
+            </div>
+        }
+      </div>
+    </>
   )
 }
 
