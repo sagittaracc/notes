@@ -18,8 +18,7 @@ export const saveNote = async (formData: FormData) => {
 export const deleteNote = async (formData: FormData) => {
   const id = formData.get("id") as unknown as number;
 
-  const note = Note.findById(Number(id));
-  await note.delete();
+  await Note.delete(Number(id));
 
   revalidatePath("/");
 }
