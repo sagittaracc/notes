@@ -7,7 +7,7 @@ import { IHomePageRequest } from "@/types/home-page";
 
 export default async function Home(request: IHomePageRequest) {
   const searchParams = await request.searchParams;
-  const dataProvider = new ActiveProvider(Note.find(), searchParams);
+  const dataProvider = new ActiveProvider(Note.model(), searchParams);
 
   return (
     <>

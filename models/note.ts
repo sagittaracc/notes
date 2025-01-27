@@ -21,7 +21,7 @@ class Note
     return model;
   }
 
-  static find(): ActiveRecord {
+  static model(): ActiveRecord {
     return async (query: TQuery) => {
       const [data, count] = await prisma.$transaction([
         this.findMany(query),
