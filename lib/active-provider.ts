@@ -20,13 +20,13 @@ export default class ActiveProvider {
   }
 
   async fetch<T>(): Promise<T[]> {
-    const [data, count] = await this.model.query<T>();
+    const [data, count] = await this.model.query();
 
     this.pageCount = Math.ceil(count / this.pageSize);
     this.chunkLength = data.length;
     this.totalCount = count;
 
-    return data;
+    return data as T[];
   }
 
   getModel() {

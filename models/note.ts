@@ -27,9 +27,9 @@ class Note extends BaseModel
     });
   }
 
-  async query<U>(): Promise<[U[], number]> {
+  async query(): Promise<[object[], number]> {
     return prisma.$transaction([
-      prisma.note.findMany({skip: this.offset, take: this.limit, orderBy: this.orderBy}) as PrismaPromise<U[]>,
+      prisma.note.findMany({skip: this.offset, take: this.limit, orderBy: this.orderBy}),
       prisma.note.count(),
     ]);
   }
