@@ -25,7 +25,7 @@ abstract class BaseModel
     });
   }
 
-  abstract query(): Promise<[object[], number]>;
+  abstract query<U>(): Promise<[U[], number]>;
 }
 
 export default BaseModel;

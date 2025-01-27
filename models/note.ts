@@ -1,5 +1,6 @@
 import BaseModel from "@/lib/base-model";
 import { prisma } from "@/lib/prisma";
+import { PrismaPromise } from "@prisma/client";
 
 class Note extends BaseModel
 {
@@ -26,9 +27,9 @@ class Note extends BaseModel
     });
   }
 
-  async query(): Promise<[object[], number]> {
+  async query<U>(): Promise<[U[], number]> {
     return prisma.$transaction([
-      prisma.note.findMany({skip: this.offset, take: this.limit, orderBy: this.orderBy}),
+      prisma.note.findMany({skip: this.offset, take: this.limit, orderBy: this.orderBy}) as PrismaPromise<U[]>,
       prisma.note.count(),
     ]);
   }
