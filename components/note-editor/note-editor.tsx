@@ -6,7 +6,7 @@ import noteStore from '../../store';
 import { deleteNote, saveNote } from '@/lib/actions';
 import styles from './note-editor.module.scss';
 
-const Note = () => {
+const NoteEditor = () => {
   const [noteText, setNoteText] = useState<string>('');
 
   useEffect(() => {
@@ -51,4 +51,4 @@ const Note = () => {
   )
 }
 
-export default observer(Note)
+export default observer(NoteEditor)
