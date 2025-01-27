@@ -5,5 +5,3 @@ export type TQuery = {
   limit: number
   orderBy: TOrderBy
 }
-
-export type ActiveRecord = (query: TQuery) => Promise<[Object[], number]>;

@@ -1,36 +1,11 @@
+import BaseModel from "@/lib/base-model";
 import { prisma } from "@/lib/prisma";
-import { ActiveRecord, TQuery } from "@/types/provider";
 import { PrismaPromise } from "@prisma/client";
 
-class Note
+class Note extends BaseModel
 {
   public id?: number;
   public text: string = '';
-
-  static findMany(query: TQuery): PrismaPromise<Object[]> {
-    return prisma.note.findMany({
-      skip: query.offset,
-      take: query.limit,
-      orderBy: query.orderBy
-    });
-  }
-
-  static findById(id: number) {
-    const model = new this;
-    model.id = id;
-    return model;
-  }
-
-  static model(): ActiveRecord {
-    return async (query: TQuery) => {
-      const [data, count] = await prisma.$transaction([
-        this.findMany(query),
-        this.getCount()
-      ]);
-
-      return [data, count];
-    }
-  }
 
   save() {
     if (this.id) {
@@ -54,8 +29,30 @@ class Note
     }
   }
 
-  static getCount(): PrismaPromise<number> {
+  count(): PrismaPromise<number> {
     return prisma.note.count();
+  }
+
+  findMany(): PrismaPromise<Object[]> {
+    return prisma.note.findMany({
+      skip: this.offset,
+      take: this.limit,
+      orderBy: this.orderBy
+    });
+  }
+
+  async query(): Promise<[Object[], number]> {
+    return prisma.$transaction([
+      this.findMany(),
+      this.count()
+    ]);
+  }
+
+  static findById(id: number) {
+    const model = this.model();
+    model.id = id;
+
+    return model;
   }
 }
 

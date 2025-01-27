@@ -12,7 +12,9 @@ type TNoteListProps = {
 }
 
 const NoteList: FC<TNoteListProps> = async ({ dataProvider }) => {
-  const notes = await dataProvider.order('createdAt', 'desc').fetch() as Array<INote>;
+  dataProvider.getModel().order('createdAt', 'desc');
+
+  const notes = await dataProvider.fetch() as INote[];
 
   return (
     <>
