@@ -33,7 +33,7 @@ class Note extends BaseModel
     return prisma.note.count();
   }
 
-  findMany(): PrismaPromise<Object[]> {
+  findMany(): PrismaPromise<object[]> {
     return prisma.note.findMany({
       skip: this.offset,
       take: this.limit,
@@ -41,7 +41,7 @@ class Note extends BaseModel
     });
   }
 
-  async query(): Promise<[Object[], number]> {
+  async query(): Promise<[object[], number]> {
     return prisma.$transaction([
       this.findMany(),
       this.count()
