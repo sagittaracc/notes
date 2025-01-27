@@ -19,18 +19,18 @@ export default class ActiveProvider {
     this.model.setLimit(this.pageSize);
   }
 
-  getModel() {
-    return this.model;
-  }
-
-  async fetch(): Promise<object[]> {
+  async fetch<T>(): Promise<T[]> {
     const [data, count] = await this.model.query();
 
     this.pageCount = Math.ceil(count / this.pageSize);
     this.chunkLength = data.length;
     this.totalCount = count;
 
-    return data;
+    return data as T[];
+  }
+
+  getModel() {
+    return this.model;
   }
 
   tooBig(): boolean {
