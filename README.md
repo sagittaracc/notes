@@ -1,5 +1,4 @@
-# Установка
-## База данных
+## Установка
 - Запустите сервер базы данных (MySQL)
 
 `$ docker run --name notes-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=verysecret -d mysql:9`
