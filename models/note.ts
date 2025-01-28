@@ -1,6 +1,5 @@
 import BaseModel from "@/lib/base-model";
 import { prisma } from "@/lib/prisma";
-import { PrismaPromise } from "@prisma/client";
 
 class Note extends BaseModel
 {
