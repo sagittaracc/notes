@@ -14,7 +14,7 @@ type TNoteItemProps = {
 
 const NoteItem: FC<TNoteItemProps> = ({ note }) => {
 
-  const edit = (note: INote) => (
+  const toggle = (note: INote) => (
     noteStore.selected(note)
       ? noteStore.deselect()
       : noteStore.select(note.id, note.text)
@@ -28,7 +28,7 @@ const NoteItem: FC<TNoteItemProps> = ({ note }) => {
         'pointer',
         {[styles.active]: noteStore.selected(note)}
       )
-    } onClick={() => edit(note)}>
+    } onClick={() => toggle(note)}>
       <p className="m-0">{note.text}</p>
       <p className="m-0 text-right text-inactive font-small">
         {moment(note.createdAt).format('DD.MM.YYYY')}
